@@ -1,0 +1,1 @@
+ // we will be getting our transcripts from the youtube api and sending it over to OpenAi here
