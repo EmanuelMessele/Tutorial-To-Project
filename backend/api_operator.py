@@ -12,9 +12,14 @@ def main():
     
     videoID = sys.argv[1] # extracting the videoID
     
-    ytapi = YouTubeTranscriptApi()
-    transcript = ytapi.fetch(videoID)
+    try:
+        ytapi = YouTubeTranscriptApi()
+        transcript = ytapi.fetch(videoID)
+        text = [snippet.text for snippet in transcript]
+        print(json.dumps(text)) # loop thru every item in the transcript list (each item is a FetchedTranscriptSNippet object and we take out the text from each)
+    except Exception as e:
+        print(json.dumps({"error": str(e)}))
 
-    return transcript
+    
 
 main()

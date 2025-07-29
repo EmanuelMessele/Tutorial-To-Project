@@ -33,10 +33,17 @@ app.post("/api/transcript", async (req,res) => { // we dont have to check for th
      execFile('python', ['api_operator.py', videoID], (error, stdout, stderr) => {
         if(error){
             console.error("Python Error", error); 
-            return; 
+            return res.status(500).json({error: "Python exec failed"}); 
         }
 
-        console.log("Transcript Output", stdout)
+        try{
+            const transcript = JSON.parse(stdout) /// stdout is our json transcript
+            console.log("Transcript Output: ", transcript)
+            res.json({transcript});
+        } catch (error) {
+            console.error("Error parsing python output", error)
+            res.status(500).json({error: "failed to parse transcript"}); 
+        }
      });
 
 });
