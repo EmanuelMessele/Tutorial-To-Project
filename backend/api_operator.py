@@ -20,6 +20,6 @@ def main():
     except Exception as e:
         print(json.dumps({"error": str(e)}))
 
-    
+        # sending to AI
 
 main()
