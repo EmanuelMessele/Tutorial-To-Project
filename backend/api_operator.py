@@ -3,6 +3,8 @@
 import sys # now we can access the commmand line arguments like videoID from our JS
 import json # so we can format whatever we want to return as a JSON
 from youtube_transcript_api import YouTubeTranscriptApi
+import openai
+import os
 
 def main():
     # 1 geting our videoID
@@ -19,7 +21,4 @@ def main():
         print(json.dumps(text)) # loop thru every item in the transcript list (each item is a FetchedTranscriptSNippet object and we take out the text from each)
     except Exception as e:
         print(json.dumps({"error": str(e)}))
-
-        # sending to AI
-
 main()
