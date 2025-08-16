@@ -56,7 +56,6 @@ app.post("/api/transcript", async (req,res) => { // we dont have to check for th
         try{
             const transcript = JSON.parse(stdout) /// stdout is our json transcript
             console.log("Transcript Output: ", transcript)
-            res.json({transcript});
 
             // ai
             const client = new OpenAI({

@@ -4,6 +4,7 @@ import "./LinkInsertCard.css";
 const LinkInsertCard = () => {
   // useState for chaning the state of our link
   const [link, setLink] = useState("");
+  const [ideas, setIdeas] = useState<string>("");
 
   const handleClick = async () => {
     // now we know it has access to the link
@@ -21,6 +22,7 @@ const LinkInsertCard = () => {
 
       const data = await response.json();
       console.log("Response from backend:", data);
+      setIdeas(data);
     } catch (error) {
       console.error("Error: ", error);
     }
@@ -44,6 +46,18 @@ const LinkInsertCard = () => {
         </form>
         <button onClick={handleClick}> Submit </button>
       </div>
+
+      {/* Conditional Rendering If our ideas work and show up they will be presented here */}
+      {ideas && (
+        <div>
+          <h2>Project Ideas:</h2>
+          <ul>
+            {ideas.split("/n").map((idea, index) => (
+              <li key={index}>{idea}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </>
   );
 };
